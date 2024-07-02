@@ -22,3 +22,6 @@ CodeCov.xml
 
 # generated docs
 docs/site
+exporter/M365DSC/secrets.psd1
+exporter/M365DSC/secrets.json
+exporter/M365DSC/GraphCert-Canadian Pharmacists Assn-3ccc8c46-2b83-46bd-a00e-d88a402122dd.pfx
