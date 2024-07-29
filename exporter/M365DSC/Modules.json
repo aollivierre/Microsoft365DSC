@@ -8,7 +8,8 @@
         "PSWriteHTML",
         "MSAL.PS",
         "Microsoft.Graph.Groups",
-        "SvRooij.ContentPrep.Cmdlet"
+        "SvRooij.ContentPrep.Cmdlet",
+        "Microsoft.Graph.Beta.Identity.DirectoryManagement"
     ],
     "importedModules": [
         "Microsoft.Graph.Identity.DirectoryManagement",
@@ -20,6 +21,7 @@
         "PSWriteHTML",
         "MSAL.PS",
         "Microsoft.Graph.Groups",
-        "SvRooij.ContentPrep.Cmdlet"
+        "SvRooij.ContentPrep.Cmdlet",
+        "Microsoft.Graph.Beta.Identity.DirectoryManagement"
     ]
 }

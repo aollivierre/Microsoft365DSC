@@ -40,9 +40,10 @@ elseif ($pfxFiles.Count -gt 1) {
 # Use the first (and presumably only) PFX file found
 $certPath = $pfxFiles[0].FullName
 
-Write-Output "PFX file found: $certPath"
+Write-Host "PFX file found: $certPath"
 
 $CertPassword = $secrets.CertPassword
+
 
 
 # Now populate the connection parameters with values from the secrets file
@@ -115,9 +116,9 @@ function Initialize-Environment {
         Import-Module -Name $global:modulePath -Verbose -Force:$true -Global:$true
 
         # Log the paths to verify
-        Write-Output "Module Path: $global:modulePath"
-        Write-Output "Repo Path: $global:Repo_Path"
-        Write-Output "Repo Winget Path: $global:Repo_winget"
+        Write-Host "Module Path: $global:modulePath"
+        Write-Host "Repo Path: $global:Repo_Path"
+        Write-Host "Repo Winget Path: $global:Repo_winget"
     }
 
     function Setup-LinuxEnvironment {
@@ -159,14 +160,14 @@ Initialize-Environment
 
 
 # Example usage of global variables outside the function
-Write-Output "Global variables set by Initialize-Environment:"
-Write-Output "scriptBasePath: $scriptBasePath"
-Write-Output "modulesBasePath: $modulesBasePath"
-Write-Output "modulePath: $modulePath"
-Write-Output "AOscriptDirectory: $AOscriptDirectory"
-Write-Output "directoryPath: $directoryPath"
-Write-Output "Repo_Path: $Repo_Path"
-Write-Output "Repo_winget: $Repo_winget"
+Write-Host "Global variables set by Initialize-Environment:"
+Write-Host "scriptBasePath: $scriptBasePath"
+Write-Host "modulesBasePath: $modulesBasePath"
+Write-Host "modulePath: $modulePath"
+Write-Host "AOscriptDirectory: $AOscriptDirectory"
+Write-Host "directoryPath: $directoryPath"
+Write-Host "Repo_Path: $Repo_Path"
+Write-Host "Repo_winget: $Repo_winget"
 
 
 
@@ -208,7 +209,7 @@ try {
   
     $ModulesFolderPath = Get-ModulesFolderPath -WindowsPath "C:\code\modules" -UnixPath "/usr/src/code/modules"
     # $ModulesFolderPath = Get-ModulesFolderPath -WindowsPath "$PsScriptRoot" -UnixPath "/usr/src/code/modules"
-    Write-host "Modules folder path: $ModulesFolderPath"
+    Write-Host "Modules folder path: $ModulesFolderPath"
 
 }
 catch {
@@ -297,9 +298,6 @@ Log-Params -Params @{accessToken = $accessToken }
 
 Get-TenantDetails
 
-
-
-
 ################################################################################################################################
 ################################################ START M365 DSC CONNECTING ####################################################
 ################################################################################################################################
@@ -309,6 +307,14 @@ Get-TenantDetails
 # Write-EnhancedLog -Message "Reading credentials from $SecretsFile" -Level "INFO"
 # $Secrets = Import-PowerShellDataFile -Path $SecretsFile
 # $username = $Secrets.Username
+
+
+$ImportCertificateIfNotExistparams = @{
+    CertPath     = $certPath
+    CertPassword = $certPassword
+}
+
+Import-CertificateIfNotExist @ImportCertificateIfNotExistparams
 
 # Assume these variables are already defined somewhere else in the script
 $certThumbprint = $Secrets.Thumbprint
@@ -320,6 +326,7 @@ if ($null -eq $tenantDetails) {
     Write-EnhancedLog -Message "Unable to proceed without tenant details" -Level "ERROR"
     exit
 }
+
 
 # Retrieve necessary details from the tenant details
 $TenantDomain = $tenantDetails.TenantDomain
@@ -418,7 +425,7 @@ function Export-Components {
 
 # Export each category
 $CategoriesToProcess = @(
-    #"AAD",
+    "AAD"
     #"EXO",
     # "Intune"
     #"O365",
@@ -427,7 +434,7 @@ $CategoriesToProcess = @(
     #"PP",
     #"SC",
     #"SPO",
-    "Teams"
+    # "Teams"
 )
 
 foreach ($Category in $CategoriesToProcess) {
