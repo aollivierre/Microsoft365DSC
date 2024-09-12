@@ -206,7 +206,7 @@
 
 # # Store the outcome in $ModulesFolderPath
 # try {
-  
+
 #     $ModulesFolderPath = Get-ModulesFolderPath -WindowsPath "C:\code\modules" -UnixPath "/usr/src/code/modules"
 #     # $ModulesFolderPath = Get-ModulesFolderPath -WindowsPath "$PsScriptRoot" -UnixPath "/usr/src/code/modules"
 #     Write-Host "Modules folder path: $ModulesFolderPath"
@@ -261,7 +261,7 @@
 # ################################################ END MODULE CHECKING ###########################################################
 # ################################################################################################################################
 
-    
+
 # ################################################################################################################################
 # ################################################ END LOGGING ###################################################################
 # ################################################################################################################################
@@ -399,7 +399,7 @@ function Handle-Error {
         [Parameter(Mandatory = $true)]
         [System.Management.Automation.ErrorRecord]$ErrorRecord
     )
-    
+
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         $fullErrorDetails = Get-Error -InputObject $ErrorRecord | Out-String
     } else {
